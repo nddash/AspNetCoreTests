@@ -39,5 +39,5 @@ jobs:
     - uses: dorny/test-reporter@v1
       with:
         name: dotnet Tests                
-        path: ${{ github.workspace }}/'*.trx'                     
+        path: ${{ github.workspace }}/TestResults/*.trx                 
         reporter: dotnet-trx
