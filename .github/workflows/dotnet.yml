@@ -38,7 +38,7 @@ jobs:
       
     - uses: dorny/test-reporter@v1
       with:
-        artifact: dotnet-results-6.0.x           # artifact name
+        artifact: TestResults-6.0.x       # artifact name
         name: dotnet Tests                # Name of the check run which will be created
         path: '*.trx'                     # Path to test results (inside artifact .zip)
         reporter: dotnet-trx
