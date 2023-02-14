@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: [ '5.0.x', '6.0.x' ]
+        dotnet-version: [ '6.0.x' ]
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET ${{ matrix.dotnet-version }}
@@ -23,7 +23,7 @@ jobs:
       with:
         dotnet-version: ${{ matrix.dotnet-version }}
     - name: Restore dependencies
-      run: dotnet restore AspNetCoreTests/AspNetCoreTests.sln && dotnet add package LiquidTestReports.Markdown
+      run: dotnet add package LiquidTestReports.Markdown AspNetCoreTests/AspNetCoreTests.UnitTests/AspNetCoreTests.UnitTests.csproj && dotnet restore AspNetCoreTests/AspNetCoreTests.sln
     - name: Build
       run: dotnet build --no-restore AspNetCoreTests/AspNetCoreTests.sln
     - name: Test
