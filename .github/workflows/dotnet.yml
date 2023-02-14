@@ -23,7 +23,7 @@ jobs:
       with:
         dotnet-version: ${{ matrix.dotnet-version }}
     - name: Restore dependencies
-      run: dotnet restore AspNetCoreTests/AspNetCoreTests.sln
+      run: dotnet restore AspNetCoreTests/AspNetCoreTests.sln && dotnet add package LiquidTestReports.Markdown
     - name: Build
       run: dotnet build --no-restore AspNetCoreTests/AspNetCoreTests.sln
     - name: Test
