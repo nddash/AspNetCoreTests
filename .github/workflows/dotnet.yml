@@ -27,7 +27,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore AspNetCoreTests/AspNetCoreTests.sln
     - name: Test
-      run: dotnet test --no-build --verbosity normal AspNetCoreTests/AspNetCoreTests.sln --logger "trx;LogFileName=test-results.trx"
+      run: dotnet test --no-build --verbosity normal AspNetCoreTests/AspNetCoreTests.sln --logger trx --results-directory "TestResults"
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.2
       with:
