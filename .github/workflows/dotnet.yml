@@ -48,12 +48,18 @@ jobs:
           path: ${{ github.workspace }}/TestResults
       # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}  
+    
+    - run: |
+        echo "******************"
+        find  ${{github.workspace }} -type f -iname "*.trx"
+        #ls -ltr ${{ github.workspace }}/TestResults/*
+        
+        
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
       with:
         files: |
-          ${{ github.workspace }}/TestResults/**/*.xml
           ${{ github.workspace }}/TestResults/**/*.trx
   
     - name: Perform CodeQL Analysis
