@@ -43,12 +43,17 @@ jobs:
       run: dotnet build --no-restore AspNetCoreTests/AspNetCoreTests.sln
     - name: Test
       run: dotnet test --no-build --verbosity normal AspNetCoreTests/AspNetCoreTests.sln --logger trx --results-directory "${{ github.workspace }}/TestResults" -p:CollectCoverage=true -p:CoverletOutput=TestResults/ -p:CoverletOutputFormat=opencover
-    
+
+    - run: |
+        echo "******************"
+        find  ${{github.workspace }} -type f
+        
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@5.1.18
       with:
-        reports: '/home/runner/work/AspNetCoreTests/AspNetCoreTests/TestResults/coverage.opencover.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
-        targetdir: 'TestResults' # REQUIRED # The directory where the generated report should be saved.
+        reports: 'coverage.opencover.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+        targetdir: '/home/runner/work/AspNetCoreTests/AspNetCoreTests/TestResults' # REQUIRED # The directory where the generated report should be saved.
+        reporttypes: 'HtmlInline;Cobertura;MarkdownSummary'
         
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.2
@@ -58,10 +63,7 @@ jobs:
       # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}  
     
-    - run: |
-        echo "******************"
-        find  ${{github.workspace }} -type f -iname "*.trx"
-        #ls -ltr ${{ github.workspace }}/TestResults/*
+
 
     - name: Test Report
       uses: dorny/test-reporter@v1
