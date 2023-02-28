@@ -47,7 +47,7 @@ jobs:
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@5.1.18
       with:
-        reports: 'coverage.opencover.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+        reports: '/home/runner/work/AspNetCoreTests/AspNetCoreTests/TestResults/coverage.opencover.xml' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
         targetdir: 'TestResults' # REQUIRED # The directory where the generated report should be saved.
         
     - name: Upload a Build Artifact
